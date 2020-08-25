@@ -1,5 +1,29 @@
 # Change Log
 
+## 2.67.0 (2020-08-25)
+[Source](https://github.com/nerdvegas/rez/tree/2.67.0) | [Diff](https://github.com/nerdvegas/rez/compare/2.66.1...2.67.0)
+
+**Merged pull requests:**
+
+- Ninja support [\#940](https://github.com/nerdvegas/rez/pull/940) ([bareya](https://github.com/bareya))
+- print warning once if pkg cache dir not present [\#942](https://github.com/nerdvegas/rez/pull/942) ([nerdvegas](https://github.com/nerdvegas))
+
+**Closed issues:**
+
+- don't raise on missing package cache dir [\#941](https://github.com/nerdvegas/rez/issues/941)
+
+## 2.66.1 (2020-08-25)
+[Source](https://github.com/nerdvegas/rez/tree/2.66.1) | [Diff](https://github.com/nerdvegas/rez/compare/2.66.0...2.66.1)
+
+**Merged pull requests:**
+
+- Fix #934, no hash string in include script file name [\#935](https://github.com/nerdvegas/rez/pull/935) ([davidlatwe](https://github.com/davidlatwe))
+- Raise unversioned error when config not allowed [\#938](https://github.com/nerdvegas/rez/pull/938) ([davidlatwe](https://github.com/davidlatwe))
+
+**Closed issues:**
+
+- Installed package not including latest module [\#934](https://github.com/nerdvegas/rez/issues/934)
+
 ## 2.66.0 (2020-08-11)
 [Source](https://github.com/nerdvegas/rez/tree/2.66.0) | [Diff](https://github.com/nerdvegas/rez/compare/2.65.0...2.66.0)
 
