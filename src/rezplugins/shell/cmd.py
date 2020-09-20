@@ -153,7 +153,7 @@ class CMD(Shell):
                     stdin=False, command=None, env=None, quiet=False,
                     pre_command=None, add_rez=True, **Popen_args):
 
-        command = self._reveal_alias(command)
+        command = self._expand_alias(command)
         startup_sequence = self.get_startup_sequence(rcfile, norc, bool(stdin), command)
         shell_command = None
 
@@ -360,10 +360,26 @@ class CMD(Shell):
             self._doskey_alias = dict()
         self._doskey_alias[key] = value
 
-    def _reveal_alias(self, command):
-        if self._doskey_alias is None:
-            return command
-        return self._doskey_alias.get(command, command)
+    def _expand_alias(self, command):
+        """Expand `command` if alias is being presented
+
+        This is important for Windows CMD shell because the doskey.exe isn't
+        executed yet when the alias is being passed in `command`.
+
+        Which means we could not rely on doskey.exe to execute alias in first
+        run.
+
+        So here we lookup alias that were just parsed from package, replace
+        it with full command if matched.
+
+        """
+        command_map = self._doskey_alias or dict()
+
+        for alias in command_map:
+            if command == alias or command.startswith(alias + " "):
+                return command_map[alias] + command[len(alias):]
+
+        return command
 
 
 def register_plugin():
