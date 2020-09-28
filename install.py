@@ -27,9 +27,15 @@ from rez.vendor.distlib.scripts import ScriptMaker
 from build_utils.virtualenv.virtualenv import create_environment, path_locations
 
 
+IS_CONDA = bool(int(os.getenv("CONDA_SHLVL", "0")))
+
+
 def get_py_venv_executable(dest_dir):
     # get virtualenv's python executable
-    _, _, _, venv_bin_dir = path_locations(dest_dir)
+    if IS_CONDA:
+        venv_bin_dir = dest_dir
+    else:
+        _, _, _, venv_bin_dir = path_locations(dest_dir)
 
     env = {
         "PATH": venv_bin_dir,
@@ -109,8 +115,9 @@ def install(dest_dir, print_welcome=False):
     """
     print("installing rez to %s..." % dest_dir)
 
-    # create the virtualenv
-    create_environment(dest_dir)
+    if not IS_CONDA:
+        # create the virtualenv
+        create_environment(dest_dir)
 
     # install rez from source
     install_rez_from_source(dest_dir)
@@ -122,8 +129,9 @@ def install(dest_dir, print_welcome=False):
     completion_path = copy_completion_scripts(dest_dir)
 
     # mark venv as production rez install. Do not remove - rez uses this!
-    _, _, _, venv_bin_dir = path_locations(dest_dir)
-    dest_bin_dir = os.path.join(venv_bin_dir, "rez")
+    venv_bin_path, _ = get_py_venv_executable(dest_dir)
+    dest_bin = "Scripts" if IS_CONDA else "rez"
+    dest_bin_dir = os.path.join(venv_bin_path, dest_bin)
     validation_file = os.path.join(dest_bin_dir, ".rez_production_install")
     with open(validation_file, 'w') as f:
         f.write(_rez_version)
