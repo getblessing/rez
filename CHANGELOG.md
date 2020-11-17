@@ -1,5 +1,48 @@
 # Change Log
 
+## 2.69.4 (2020-11-17)
+[Source](https://github.com/nerdvegas/rez/tree/2.69.4) | [Diff](https://github.com/nerdvegas/rez/compare/2.69.3...2.69.4)
+
+**Merged pull requests:**
+
+- Fix pip.py get purelib error. [\#973](https://github.com/nerdvegas/rez/pull/973) ([zclongpop123](https://github.com/zclongpop123))
+
+## 2.69.3 (2020-11-17)
+[Source](https://github.com/nerdvegas/rez/tree/2.69.3) | [Diff](https://github.com/nerdvegas/rez/compare/2.69.2...2.69.3)
+
+**Merged pull requests:**
+
+- handling QFileDialog.getSaveFileName return type [\#963](https://github.com/nerdvegas/rez/pull/963) ([sparklabor](https://github.com/sparklabor))
+
+**Closed issues:**
+
+- QFileDialog.getSaveFileName and getOpenFileName return tuple not str [\#962](https://github.com/nerdvegas/rez/issues/962)
+
+## 2.69.2 (2020-11-17)
+[Source](https://github.com/nerdvegas/rez/tree/2.69.2) | [Diff](https://github.com/nerdvegas/rez/compare/2.69.1...2.69.2)
+
+**Merged pull requests:**
+
+- 965| Fix io.UnsupportedOperation [\#966](https://github.com/nerdvegas/rez/pull/966) ([spsalefeve](https://github.com/spsalefeve))
+
+**Closed issues:**
+
+- io.UnsupportedOperation when using rez api with pytest [\#965](https://github.com/nerdvegas/rez/issues/965)
+
+## 2.69.1 (2020-11-17)
+[Source](https://github.com/nerdvegas/rez/tree/2.69.1) | [Diff](https://github.com/nerdvegas/rez/compare/2.69.0...2.69.1)
+
+**Merged pull requests:**
+
+- Update vendored pydot (1.4.2.dev0) [\#970](https://github.com/nerdvegas/rez/pull/970) ([davidlatwe](https://github.com/davidlatwe))
+
+## 2.69.0 (2020-11-17)
+[Source](https://github.com/nerdvegas/rez/tree/2.69.0) | [Diff](https://github.com/nerdvegas/rez/compare/2.68.5...2.69.0)
+
+**Merged pull requests:**
+
+- Fix forwarding script on Windows (suite supporting) [\#968](https://github.com/nerdvegas/rez/pull/968) ([davidlatwe](https://github.com/davidlatwe))
+
 ## 2.68.5 (2020-10-06)
 [Source](https://github.com/nerdvegas/rez/tree/2.68.5) | [Diff](https://github.com/nerdvegas/rez/compare/2.68.4...2.68.5)
 

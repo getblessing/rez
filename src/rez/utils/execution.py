@@ -6,6 +6,7 @@ from rez.vendor.six import six
 from rez.utils.yaml import dump_yaml
 from rez.vendor.enum import Enum
 from contextlib import contextmanager
+from io import UnsupportedOperation
 import subprocess
 import sys
 import stat
@@ -52,7 +53,10 @@ class Popen(_PopenBase):
         if "stdin" not in kwargs:
             try:
                 file_no = sys.stdin.fileno()
-            except AttributeError:
+            except (
+                AttributeError,
+                UnsupportedOperation  # https://github.com/nerdvegas/rez/pull/966
+            ):
                 file_no = sys.__stdin__.fileno()
 
             if file_no not in (0, 1, 2):
@@ -125,10 +129,14 @@ def create_executable_script(filepath, body, program=None, py_script_mode=None):
 
     """
     from rez.config import config
-    from rez.system import system
     from rez.utils.platform_ import platform_
     program = program or "python"
     py_script_mode = py_script_mode or config.create_executable_script_mode
+
+    # https://github.com/nerdvegas/rez/pull/968
+    is_forwarding_script_on_windows = (program == "_rez_fwd"
+                                       and platform_.name == "windows"
+                                       and filepath.lower().endswith(".cmd"))
 
     if callable(body):
         from rez.utils.sourcecode import SourceCode
@@ -155,8 +163,7 @@ def create_executable_script(filepath, body, program=None, py_script_mode=None):
     for current_filepath in script_filepaths:
         with open(current_filepath, 'w') as f:
             # TODO: make cross platform
-            if (platform_.name == "windows"
-                    and current_filepath.lower().endswith(".cmd")):
+            if is_forwarding_script_on_windows:
                 # following lines of batch script will be stripped
                 # before yaml.load
                 f.write("@echo off\n")
